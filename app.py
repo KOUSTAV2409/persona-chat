@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from flask import Flask, jsonify, request, send_file
+from flask import Flask, Response, jsonify, request
 from openai import OpenAI
 
 app = Flask(__name__)
@@ -13,6 +13,7 @@ PERSONAS = {
 }
 MAX_MESSAGES = 20
 MODEL = "gpt-4o-mini"
+INDEX_HTML = (ROOT / "public" / "index.html").read_text(encoding="utf-8")
 
 
 def load_persona(name: str) -> str:
@@ -24,7 +25,7 @@ def load_persona(name: str) -> str:
 
 @app.route("/")
 def index():
-    return send_file(ROOT / "public" / "index.html", mimetype="text/html")
+    return Response(INDEX_HTML, mimetype="text/html")
 
 
 @app.route("/api/chat", methods=["POST", "OPTIONS"])
