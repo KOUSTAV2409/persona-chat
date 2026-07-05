@@ -7,20 +7,33 @@ from openai import OpenAI
 app = Flask(__name__)
 
 ROOT = Path(__file__).resolve().parent
-PERSONAS = {
+PERSONA_FILES = {
     "Hitesh Choudhary": ROOT / "personas" / "hitesh.txt",
     "Piyush Garg": ROOT / "personas" / "piyush.txt",
 }
 MAX_MESSAGES = 20
 MODEL = "gpt-4o-mini"
-INDEX_HTML = (ROOT / "public" / "index.html").read_text(encoding="utf-8")
+
+
+def _read(path: Path) -> str:
+    return path.read_text(encoding="utf-8")
+
+
+def load_index_html() -> str:
+    for candidate in (ROOT / "index.html", ROOT / "public" / "index.html"):
+        if candidate.exists():
+            return _read(candidate)
+    return "<h1>Persona Chat</h1><p>Frontend file missing.</p>"
 
 
 def load_persona(name: str) -> str:
-    path = PERSONAS.get(name)
-    if not path or not path.exists():
-        raise ValueError(f"Unknown persona: {name}")
-    return path.read_text(encoding="utf-8")
+    path = PERSONA_FILES.get(name)
+    if path and path.exists():
+        return _read(path)
+    raise ValueError(f"Unknown persona: {name}")
+
+
+INDEX_HTML = load_index_html()
 
 
 @app.route("/")
@@ -38,8 +51,8 @@ def chat():
         persona = body.get("persona", "Hitesh Choudhary")
         messages = body.get("messages", [])
 
-        if persona not in PERSONAS:
-            return jsonify({"error": f"Invalid persona. Use: {list(PERSONAS.keys())}"}), 400
+        if persona not in PERSONA_FILES:
+            return jsonify({"error": f"Invalid persona. Use: {list(PERSONA_FILES.keys())}"}), 400
         if not messages:
             return jsonify({"error": "messages required"}), 400
 
