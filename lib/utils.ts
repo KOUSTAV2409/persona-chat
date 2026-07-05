@@ -26,29 +26,56 @@ export const PERSONA_META: Record<
 > = {
   "Hitesh Choudhary": {
     tagline: "Hinglish · practical · motivational",
-    description: "Learn step-by-step with friendly Hinglish explanations.",
+    description: "Friendly step-by-step teaching inspired by Chai aur Code.",
     initials: "HC",
     color: "bg-orange-500",
-    greeting: "Chalo, kya seekhna hai aaj?",
+    greeting: "What can I help you learn today?",
   },
   "Piyush Garg": {
     tagline: "Technical · structured · production-focused",
-    description: "Deep technical answers with real-world engineering context.",
+    description: "Deep technical answers with real engineering context.",
     initials: "PG",
     color: "bg-blue-500",
-    greeting: "What would you like to understand today?",
+    greeting: "What would you like to understand?",
   },
 };
 
-export const SUGGESTIONS: Record<Persona, string[]> = {
+export const SUGGESTIONS: Record<
+  Persona,
+  { title: string; label: string; action: string }[]
+> = {
   "Hitesh Choudhary": [
-    "Explain closures in JavaScript simply",
-    "How do I start learning web dev?",
-    "Tips for cracking my first dev job",
+    {
+      title: "Explain closures",
+      label: "in JavaScript simply",
+      action: "Explain closures in JavaScript simply for a beginner",
+    },
+    {
+      title: "Start web dev",
+      label: "from absolute zero",
+      action: "How should I start learning web development from zero?",
+    },
+    {
+      title: "First dev job",
+      label: "tips for tier-3 college",
+      action: "Tips to get my first developer job from a tier-3 college",
+    },
   ],
   "Piyush Garg": [
-    "Explain Docker vs virtual machines",
-    "What is RAG in GenAI?",
-    "How does a REST API work?",
+    {
+      title: "Explain Docker",
+      label: "vs virtual machines",
+      action: "Explain Docker vs virtual machines with pros and cons",
+    },
+    {
+      title: "What is RAG",
+      label: "in GenAI systems?",
+      action: "What is RAG in GenAI and how does it work?",
+    },
+    {
+      title: "REST API basics",
+      label: "for backend interviews",
+      action: "Explain REST API basics for backend interviews",
+    },
   ],
 };
