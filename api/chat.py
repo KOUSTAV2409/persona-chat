@@ -2,12 +2,13 @@ import json
 import os
 from pathlib import Path
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from openai import OpenAI
 
 app = Flask(__name__)
 
 ROOT = Path(__file__).resolve().parent.parent
+PUBLIC = ROOT / "public"
 PERSONAS = {
     "Hitesh Choudhary": ROOT / "personas" / "hitesh.txt",
     "Piyush Garg": ROOT / "personas" / "piyush.txt",
@@ -21,6 +22,11 @@ def load_persona(name: str) -> str:
     if not path or not path.exists():
         raise ValueError(f"Unknown persona: {name}")
     return path.read_text(encoding="utf-8")
+
+
+@app.route("/")
+def index():
+    return send_from_directory(PUBLIC, "index.html")
 
 
 @app.route("/api/chat", methods=["POST", "OPTIONS"])
