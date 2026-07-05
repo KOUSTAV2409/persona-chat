@@ -1,105 +1,80 @@
-# Persona Chat — Hitesh Choudhary & Piyush Garg
+# Persona Chat
 
-AI-powered chat website that simulates conversations with **Hitesh Choudhary** or **Piyush Garg** using an LLM. Switch personas from the sidebar and chat in each mentor's teaching style.
+AI-powered chat with **Hitesh Choudhary** and **Piyush Garg** persona simulations.
 
-## Live Demo
+- **Frontend:** Next.js 15 + shadcn/ui + Tailwind
+- **Backend:** Python serverless API (`api/chat.py`) on Vercel
+- **LLM:** OpenAI `gpt-4o-mini`
 
-**GitHub:** https://github.com/KOUSTAV2409/persona-chat
+## Live
 
-Deploy live in ~2 min via [Streamlit Community Cloud](https://share.streamlit.io) — see [Deployment](#deployment-streamlit-cloud--free) below.
+- GitHub: https://github.com/KOUSTAV2409/persona-chat
+- Deploy on Vercel (connect repo + add `OPENAI_API_KEY`)
 
-## Features
+## Run locally
 
-- LLM-powered chat (OpenAI `gpt-4o-mini`)
-- Switch between Hitesh Choudhary and Piyush Garg personas
-- Persona-specific system prompts loaded from `personas/`
-- Context management — keeps last 20 messages for coherent long chats
-- New chat button when switching mentors
-
-## Quick Start (Local)
-
-### 1. Clone & setup
+### 1. Install dependencies
 
 ```bash
-git clone <your-repo-url>
-cd persona
-python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
-pip install -r requirements.txt
+# Frontend
+npm install
+
+# Python backend (one-time)
+python3 -m venv venv
+source venv/bin/activate
+pip install openai flask
 ```
 
-### 2. Add API key
-
-Copy `.env.example` to `.env` and add your OpenAI key:
+### 2. Environment
 
 ```bash
 cp .env.example .env
-# Edit .env → OPENAI_API_KEY=sk-...
+# Add OPENAI_API_KEY=sk-...
 ```
 
-Get a key at [platform.openai.com/api-keys](https://platform.openai.com/api-keys).
-
-### 3. Run
-
-**Web UI (Vercel / production-style):** deploy to Vercel — see [Deployment](#deployment-vercel).
-
-**Local Streamlit UI (optional):**
+### 3. Start both servers (two terminals)
 
 ```bash
-pip install streamlit
-streamlit run streamlit_app.py
+# Terminal 1 — Python API on :5328
+source venv/bin/activate
+python backend/dev_server.py
+
+# Terminal 2 — Next.js on :3000
+npm run dev
 ```
 
-## Project Structure
+Open http://localhost:3000
+
+## Project structure
 
 ```
-persona/
-├── app.py                          # Vercel production app (Flask)
-├── streamlit_app.py                # Optional local Streamlit UI
-├── public/index.html               # Chat frontend
-├── personas/
-│   ├── hitesh.txt                  # Hitesh system prompt
-│   └── piyush.txt                  # Piyush system prompt
-├── docs/
-│   ├── DATA_COLLECTION.md
-│   ├── PROMPT_ENGINEERING.md
-│   ├── CONTEXT_MANAGEMENT.md
-│   └── SAMPLE_CONVERSATIONS.md
-├── requirements.txt
-├── .env.example
-└── README.md
+persona-chat/
+├── app/                    # Next.js pages
+├── components/             # UI (shadcn-style)
+├── api/chat.py             # Vercel Python serverless (production)
+├── backend/
+│   ├── chat_logic.py       # Shared OpenAI + persona logic
+│   └── dev_server.py       # Local Flask server
+├── personas/               # System prompts
+└── docs/                   # Documentation
 ```
 
-## Deployment (Vercel)
+## Deploy (Vercel)
 
-1. Push repo to GitHub (already done)
-2. Go to [vercel.com](https://vercel.com) → Import `KOUSTAV2409/persona-chat`
-3. Add environment variable: `OPENAI_API_KEY` = your key
-4. Deploy — live URL will be like `https://persona-chat-xxx.vercel.app`
-
-## Deployment (Streamlit Cloud — optional local-style UI)
-
-1. Push this repo to **public** GitHub (do NOT commit `.env`)
-2. Go to [share.streamlit.io](https://share.streamlit.io) → New app
-3. Main file: `streamlit_app.py`
-4. Secrets: `OPENAI_API_KEY = "sk-..."`
+1. Import GitHub repo on [vercel.com](https://vercel.com)
+2. Framework: **Next.js** (auto-detected)
+3. Add env var: `OPENAI_API_KEY`
+4. Deploy — Next.js serves UI, Python handles `/api/chat`
 
 ## Documentation
 
-| Doc | Description |
-|-----|-------------|
-| [DATA_COLLECTION.md](docs/DATA_COLLECTION.md) | How persona data was researched |
-| [PROMPT_ENGINEERING.md](docs/PROMPT_ENGINEERING.md) | System prompt design strategy |
-| [CONTEXT_MANAGEMENT.md](docs/CONTEXT_MANAGEMENT.md) | How chat history is managed |
-| [SAMPLE_CONVERSATIONS.md](docs/SAMPLE_CONVERSATIONS.md) | Example chats for both personas |
-
-## Tech Stack
-
-- **Python 3.10+**
-- **Streamlit** — web UI (no separate frontend/backend)
-- **OpenAI API** — LLM responses
-- **python-dotenv** — local env vars
+| File | Description |
+|------|-------------|
+| [DATA_COLLECTION.md](docs/DATA_COLLECTION.md) | Persona research |
+| [PROMPT_ENGINEERING.md](docs/PROMPT_ENGINEERING.md) | Prompt strategy |
+| [CONTEXT_MANAGEMENT.md](docs/CONTEXT_MANAGEMENT.md) | Chat memory |
+| [SAMPLE_CONVERSATIONS.md](docs/SAMPLE_CONVERSATIONS.md) | Examples |
 
 ## Disclaimer
 
-This is an AI simulation for educational purposes. It is not affiliated with or endorsed by Hitesh Choudhary or Piyush Garg.
+AI simulation for education. Not affiliated with Hitesh Choudhary or Piyush Garg.
