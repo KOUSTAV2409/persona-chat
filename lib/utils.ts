@@ -22,6 +22,7 @@ export const PERSONA_META: Record<
     initials: string;
     color: string;
     greeting: string;
+    avatar: string;
   }
 > = {
   "Hitesh Choudhary": {
@@ -30,6 +31,7 @@ export const PERSONA_META: Record<
     initials: "HC",
     color: "bg-orange-500",
     greeting: "What can I help you learn today?",
+    avatar: "https://avatars.githubusercontent.com/u/11613311?v=4",
   },
   "Piyush Garg": {
     tagline: "Technical · structured · production-focused",
@@ -37,6 +39,7 @@ export const PERSONA_META: Record<
     initials: "PG",
     color: "bg-blue-500",
     greeting: "What would you like to understand?",
+    avatar: "https://avatars.githubusercontent.com/u/44976328?v=4",
   },
 };
 

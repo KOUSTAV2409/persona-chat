@@ -1,6 +1,7 @@
 "use client";
 
 import { PanelLeft, PenSquare } from "lucide-react";
+import { PersonaAvatar } from "@/components/chat/persona-avatar";
 import { Persona, PERSONAS, PERSONA_META, cn } from "@/lib/utils";
 
 export function ChatSidebar({
@@ -70,14 +71,7 @@ export function ChatSidebar({
                 active ? "bg-sidebar-accent text-foreground" : "hover:bg-sidebar-accent/60"
               )}
             >
-              <div
-                className={cn(
-                  "flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white",
-                  meta.color
-                )}
-              >
-                {meta.initials}
-              </div>
+              <PersonaAvatar persona={p} size="sm" />
               <div className="min-w-0">
                 <p className="truncate font-medium">{p}</p>
                 <p className="truncate text-xs text-muted-foreground">{meta.tagline}</p>
