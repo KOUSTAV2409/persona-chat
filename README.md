@@ -54,9 +54,9 @@ streamlit run streamlit_app.py
 
 ```
 persona/
+├── app.py                          # Vercel production app (Flask)
 ├── streamlit_app.py                # Optional local Streamlit UI
-├── api/chat.py                     # Vercel serverless API
-├── public/index.html               # Vercel frontend
+├── public/index.html               # Chat frontend
 ├── personas/
 │   ├── hitesh.txt                  # Hitesh system prompt
 │   └── piyush.txt                  # Piyush system prompt
