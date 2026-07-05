@@ -41,17 +41,22 @@ Get a key at [platform.openai.com/api-keys](https://platform.openai.com/api-keys
 
 ### 3. Run
 
-```bash
-streamlit run app.py
-```
+**Web UI (Vercel / production-style):** deploy to Vercel — see [Deployment](#deployment-vercel).
 
-Open `http://localhost:8501` in your browser.
+**Local Streamlit UI (optional):**
+
+```bash
+pip install streamlit
+streamlit run streamlit_app.py
+```
 
 ## Project Structure
 
 ```
 persona/
-├── app.py                          # Streamlit UI + LLM integration
+├── streamlit_app.py                # Optional local Streamlit UI
+├── api/chat.py                     # Vercel serverless API
+├── public/index.html               # Vercel frontend
 ├── personas/
 │   ├── hitesh.txt                  # Hitesh system prompt
 │   └── piyush.txt                  # Piyush system prompt
@@ -65,18 +70,19 @@ persona/
 └── README.md
 ```
 
-## Deployment (Streamlit Cloud — Free)
+## Deployment (Vercel)
+
+1. Push repo to GitHub (already done)
+2. Go to [vercel.com](https://vercel.com) → Import `KOUSTAV2409/persona-chat`
+3. Add environment variable: `OPENAI_API_KEY` = your key
+4. Deploy — live URL will be like `https://persona-chat-xxx.vercel.app`
+
+## Deployment (Streamlit Cloud — optional local-style UI)
 
 1. Push this repo to **public** GitHub (do NOT commit `.env`)
 2. Go to [share.streamlit.io](https://share.streamlit.io) → New app
-3. Select repo, branch `main`, main file `app.py`
-4. Under **Advanced settings → Secrets**, add:
-
-```toml
-OPENAI_API_KEY = "sk-your-key-here"
-```
-
-5. Deploy — you'll get a live URL like `https://your-app.streamlit.app`
+3. Main file: `streamlit_app.py`
+4. Secrets: `OPENAI_API_KEY = "sk-..."`
 
 ## Documentation
 
