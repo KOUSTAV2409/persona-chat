@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export type Persona = "Hitesh Choudhary" | "Piyush Garg";
 
-export type Message = {
+export type ChatMessage = {
   role: "user" | "assistant";
   content: string;
 };

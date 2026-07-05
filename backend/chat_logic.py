@@ -2,7 +2,10 @@ import json
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
 from openai import OpenAI
+
+load_dotenv()
 
 ROOT = Path(__file__).resolve().parent.parent
 PERSONAS = {
