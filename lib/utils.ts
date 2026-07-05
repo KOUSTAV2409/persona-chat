@@ -16,20 +16,39 @@ export const PERSONAS: Persona[] = ["Hitesh Choudhary", "Piyush Garg"];
 
 export const PERSONA_META: Record<
   Persona,
-  { tagline: string; description: string; initials: string; accent: string }
+  {
+    tagline: string;
+    description: string;
+    initials: string;
+    color: string;
+    greeting: string;
+  }
 > = {
   "Hitesh Choudhary": {
-    tagline: "Hinglish mentor · step-by-step · motivational",
-    description:
-      "Practical educator inspired by Chai aur Code. Friendly Hinglish, analogies, beginner-first.",
+    tagline: "Hinglish · practical · motivational",
+    description: "Learn step-by-step with friendly Hinglish explanations.",
     initials: "HC",
-    accent: "from-orange-500 to-amber-400",
+    color: "bg-orange-500",
+    greeting: "Chalo, kya seekhna hai aaj?",
   },
   "Piyush Garg": {
-    tagline: "Technical deep-dives · system design · production focus",
-    description:
-      "Engineering educator inspired by piyushgarg.dev. Structured, precise, real-world context.",
+    tagline: "Technical · structured · production-focused",
+    description: "Deep technical answers with real-world engineering context.",
     initials: "PG",
-    accent: "from-violet-500 to-indigo-400",
+    color: "bg-blue-500",
+    greeting: "What would you like to understand today?",
   },
+};
+
+export const SUGGESTIONS: Record<Persona, string[]> = {
+  "Hitesh Choudhary": [
+    "Explain closures in JavaScript simply",
+    "How do I start learning web dev?",
+    "Tips for cracking my first dev job",
+  ],
+  "Piyush Garg": [
+    "Explain Docker vs virtual machines",
+    "What is RAG in GenAI?",
+    "How does a REST API work?",
+  ],
 };
