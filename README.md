@@ -4,7 +4,9 @@ AI-powered chat website that simulates conversations with **Hitesh Choudhary** o
 
 ## Live Demo
 
-Deploy via [Streamlit Community Cloud](https://share.streamlit.io) (see Deployment below).
+**GitHub:** https://github.com/KOUSTAV2409/persona-chat
+
+Deploy live in ~2 min via [Streamlit Community Cloud](https://share.streamlit.io) — see [Deployment](#deployment-streamlit-cloud--free) below.
 
 ## Features
 
